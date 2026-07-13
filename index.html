@@ -1,113 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vishvajeet Singh - Resume</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 40px; padding: 20px; }
-        h1, h2 { color: #333; }
-        ul { list-style-type: none; padding: 0; }
-        li { margin-bottom: 10px; }
-        .section { margin-bottom: 20px; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vishvajeet Singh — Backend Engineer</title>
+<meta name="description" content="Backend Engineer (4.5+ yrs) scaling distributed systems & payment platforms to 10M+ DAU, 3M+ concurrent users, 5M+ subscribers. Book a 1:1 session.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0b12; --bg2:#0f111b; --card:#141726; --card2:#171a2b;
+    --line:#242942; --text:#e9ebf5; --muted:#9aa3bd; --muted2:#6b7391;
+    --v:#8b7bff; --c:#2ad4ee; --grad:linear-gradient(120deg,#8b7bff,#2ad4ee);
+    --grad-soft:linear-gradient(120deg,rgba(139,123,255,.16),rgba(42,212,238,.16));
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;
+       -webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+  .mono{font-family:'JetBrains Mono',monospace}
+  .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 
-        /* Book-a-slot card */
-        .book { margin: 28px 0; padding: 20px 22px; border: 1px solid #eee; border-radius: 12px;
-                background: #fafafa; max-width: 460px; }
-        .book h2 { margin: 0 0 6px; }
-        .book p { margin: 0 0 14px; color: #555; }
-        #bookBtn { appearance: none; border: 0; cursor: pointer; font-size: 16px; font-weight: 600;
-                   color: #fff; background: #3399cc; padding: 12px 22px; border-radius: 28px; }
-        #bookBtn:hover { background: #2b86b5; }
-        #bookMsg { margin-top: 12px; font-size: 14px; }
-    </style>
+  /* glow background */
+  body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:radial-gradient(60% 50% at 15% 0%,rgba(139,123,255,.18),transparent 60%),
+               radial-gradient(50% 50% at 95% 10%,rgba(42,212,238,.14),transparent 60%)}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);
+      background:rgba(10,11,18,.72);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-weight:800;letter-spacing:.2px}
+  .brand span{width:26px;height:26px;display:inline-grid;place-items:center;border-radius:8px;
+    background:var(--grad);color:#07080d;font-weight:800;margin-right:9px;vertical-align:-6px}
+  .nav-links{display:flex;gap:26px;align-items:center}
+  .nav-links a{color:var(--muted);font-size:14px;font-weight:500}
+  .nav-links a:hover{color:var(--text)}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;border-radius:999px;
+       padding:11px 20px;border:0;cursor:pointer;font-size:14.5px;transition:.2s;font-family:inherit}
+  .btn-primary{background:var(--grad);color:#07080d}
+  .btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 30px -10px rgba(139,123,255,.6)}
+  .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
+  .btn-ghost:hover{border-color:var(--v);color:#fff}
+  @media(max-width:720px){.nav-links a:not(.btn){display:none}}
+
+  /* hero */
+  header.hero{padding:78px 0 40px}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);
+    border:1px solid var(--line);border-radius:999px;padding:6px 14px;background:var(--card)}
+  .dot{width:8px;height:8px;border-radius:50%;background:#2ad4ee;box-shadow:0 0 0 4px rgba(42,212,238,.18)}
+  h1{font-size:clamp(38px,7vw,68px);line-height:1.04;font-weight:800;letter-spacing:-1.5px;margin:22px 0 0}
+  .role{font-size:clamp(18px,2.6vw,24px);color:var(--muted);font-weight:600;margin-top:14px}
+  .lede{max-width:640px;color:var(--muted);font-size:17px;margin-top:18px}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+  .socials{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .chip{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted);
+    border:1px solid var(--line);border-radius:10px;padding:8px 13px;background:var(--card);transition:.2s}
+  .chip:hover{color:#fff;border-color:var(--v);transform:translateY(-1px)}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:46px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 18px;position:relative;overflow:hidden}
+  .stat::after{content:"";position:absolute;inset:0;background:var(--grad-soft);opacity:0;transition:.25s}
+  .stat:hover::after{opacity:1}
+  .stat .n{font-size:26px;font-weight:800;letter-spacing:-.5px}
+  .stat .l{font-size:12.5px;color:var(--muted);margin-top:4px;position:relative}
+  @media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+  /* sections */
+  section{padding:64px 0}
+  .kicker{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--c);letter-spacing:2px;text-transform:uppercase}
+  h2{font-size:clamp(26px,4vw,36px);font-weight:800;letter-spacing:-.8px;margin:10px 0 6px}
+  .sub{color:var(--muted);max-width:620px}
+
+  /* skills */
+  .skills{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:34px}
+  .skill{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+  .skill h3{font-size:14px;color:var(--muted);font-weight:600;margin-bottom:14px;text-transform:uppercase;letter-spacing:.6px}
+  .tags{display:flex;flex-wrap:wrap;gap:9px}
+  .tag{font-size:13.5px;padding:7px 13px;border-radius:9px;background:var(--card2);border:1px solid var(--line);color:var(--text)}
+  @media(max-width:720px){.skills{grid-template-columns:1fr}}
+
+  /* experience */
+  .exp{margin-top:34px;position:relative;padding-left:26px}
+  .exp::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--v),var(--c),transparent)}
+  .job{position:relative;padding:0 0 34px 20px}
+  .job::before{content:"";position:absolute;left:-26px;top:6px;width:12px;height:12px;border-radius:50%;
+    background:var(--bg);border:2px solid var(--v)}
+  .job .top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px;align-items:baseline}
+  .job .co{font-size:19px;font-weight:700}
+  .job .ttl{color:var(--c);font-weight:600;font-size:14.5px}
+  .job .meta{font-size:13px;color:var(--muted2);font-family:'JetBrains Mono',monospace}
+  .job ul{list-style:none;margin-top:12px;display:grid;gap:9px}
+  .job li{position:relative;padding-left:20px;color:var(--muted);font-size:15px}
+  .job li::before{content:"▹";position:absolute;left:0;color:var(--c)}
+  .job li b{color:var(--text)}
+
+  /* book */
+  .book-wrap{margin-top:20px}
+  .book{background:linear-gradient(135deg,#151833,#0e1020);border:1px solid var(--line);border-radius:24px;
+    padding:38px;position:relative;overflow:hidden}
+  .book::before{content:"";position:absolute;top:-40%;right:-10%;width:420px;height:420px;border-radius:50%;
+    background:radial-gradient(circle,rgba(139,123,255,.22),transparent 65%)}
+  .book .inner{position:relative;display:flex;flex-wrap:wrap;gap:28px;justify-content:space-between;align-items:center}
+  .book h2{margin:0}
+  .price{font-size:15px;color:var(--muted)}
+  .price b{color:#fff;font-size:22px}
+  .perks{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  .perk{font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 13px}
+  #bookMsg{margin-top:16px;font-size:14px;min-height:18px}
+
+  footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted2);font-size:14px}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(18px);transition:.6s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+</style>
 </head>
 <body>
-    <header>
-        <h1>Vishvajeet Singh</h1>
-        <p>Senior Software Engineer at Kutumb</p>
-        <p>Email: vishvajeetsingh0605@gmail.com</p>
-        <p><a href="https://www.linkedin.com/in/vishvajeet-singh-89ba79182/">LinkedIn</a> | <a href="https://github.com/vishvajeet-apty">GitHub</a></p>
-    </header>
 
-    <!-- Book a 1:1 slot (Razorpay Standard Checkout) -->
-    <section class="book">
-        <h2>Book a Slot with me</h2>
-        <p>Grab a 1:1 session — mentorship, mock interview, or a technical chat.</p>
-        <button id="bookBtn" type="button">Book a Slot with me · ₹499</button>
-        <div id="bookMsg"></div>
-    </section>
+<nav>
+  <div class="wrap">
+    <a href="#top" class="brand"><span>V</span>Vishvajeet Singh</a>
+    <div class="nav-links">
+      <a href="#work">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#book" class="btn btn-primary">Book a slot</a>
+    </div>
+  </div>
+</nav>
 
-    <section class="section">
-        <h2>Technical Skills</h2>
+<header class="hero" id="top">
+  <div class="wrap">
+    <span class="eyebrow"><span class="dot"></span> Available for 1:1 mentorship & mock interviews</span>
+    <h1>Backend engineer who<br><span class="grad-text">scales systems to millions.</span></h1>
+    <p class="role">Vishvajeet Singh · Senior Software Engineer @ Kutumb/Crafto</p>
+    <p class="lede">4.5+ years building high-scale distributed systems and payment platforms —
+      recurring billing for 5M+ subscribers, backends serving 10M+ DAU at sub-50ms p95,
+      and event-driven infra pushing 40M+ notifications/hour.</p>
+
+    <div class="cta-row">
+      <a href="#book" class="btn btn-primary">📅 Book a slot with me</a>
+      <a href="mailto:vishvajeetsingh0605@gmail.com" class="btn btn-ghost">✉️ Email me</a>
+    </div>
+
+    <div class="socials">
+      <a class="chip" href="tel:+919370994429">📞 +91 93709 94429</a>
+      <a class="chip" href="mailto:vishvajeetsingh0605@gmail.com">✉️ vishvajeetsingh0605@gmail.com</a>
+      <a class="chip" href="https://www.linkedin.com/in/vishvajeetsingh" target="_blank" rel="noopener">in · LinkedIn</a>
+      <a class="chip" href="https://github.com/vishvajeet-apty" target="_blank" rel="noopener">gh · GitHub</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="n grad-text">10M+</div><div class="l">Daily active users served</div></div>
+      <div class="stat"><div class="n grad-text">3M+</div><div class="l">Concurrent users at peak</div></div>
+      <div class="stat"><div class="n grad-text">5M+</div><div class="l">Paying subscribers billed</div></div>
+      <div class="stat"><div class="n grad-text">&lt;50ms</div><div class="l">p95 latency under load</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- BOOK (primary CTA, high on the page) -->
+<section id="book" style="padding-top:20px">
+  <div class="wrap book-wrap reveal">
+    <div class="book">
+      <div class="inner">
+        <div>
+          <div class="kicker">Work with me</div>
+          <h2>Book a 1:1 slot</h2>
+          <p class="sub" style="margin-top:8px">Mentorship, system-design deep-dives, mock interviews, or a career chat —
+            straight from someone who's built and scaled it in production.</p>
+          <div class="perks">
+            <span class="perk">System design</span>
+            <span class="perk">Mock interviews</span>
+            <span class="perk">Backend at scale</span>
+            <span class="perk">Career guidance</span>
+          </div>
+          <div id="bookMsg"></div>
+        </div>
+        <div style="text-align:center">
+          <div class="price">Single session · <b>₹499</b></div>
+          <button id="bookBtn" class="btn btn-primary" style="margin-top:14px;font-size:16px;padding:14px 26px">
+            Book a slot with me →
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker">Toolbox</div>
+      <h2>Technical skills</h2>
+      <p class="sub">The stack I use to design, build, and run high-throughput systems.</p>
+    </div>
+    <div class="skills">
+      <div class="skill reveal"><h3>Languages</h3><div class="tags">
+        <span class="tag">TypeScript</span><span class="tag">JavaScript</span><span class="tag">C++</span>
+        <span class="tag">Golang</span><span class="tag">Python</span><span class="tag">C</span></div></div>
+      <div class="skill reveal"><h3>Backend</h3><div class="tags">
+        <span class="tag">Node.js</span><span class="tag">Fastify</span><span class="tag">React.js</span>
+        <span class="tag">Flask</span><span class="tag">Redis</span><span class="tag">ElasticSearch</span></div></div>
+      <div class="skill reveal"><h3>Databases</h3><div class="tags">
+        <span class="tag">Redshift</span><span class="tag">PostgreSQL</span><span class="tag">MySQL</span>
+        <span class="tag">VectorDB</span></div></div>
+      <div class="skill reveal"><h3>Cloud & DevOps</h3><div class="tags">
+        <span class="tag">AWS</span><span class="tag">Docker</span><span class="tag">Kubernetes</span>
+        <span class="tag">ArgoCD</span><span class="tag">Lambda</span><span class="tag">GitHub Actions</span></div></div>
+      <div class="skill reveal" style="grid-column:1/-1"><h3>Monitoring & Analytics</h3><div class="tags">
+        <span class="tag">Grafana</span><span class="tag">Kibana</span><span class="tag">SumoLogic</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="work" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker">Track record</div>
+      <h2>Experience</h2>
+    </div>
+    <div class="exp">
+      <div class="job reveal">
+        <div class="top">
+          <div><div class="co">Kutumb / Crafto</div><div class="ttl">Senior Software Development Engineer</div></div>
+          <div class="meta">Aug 2024 – Present · Bengaluru</div>
+        </div>
         <ul>
-            <li><strong>Languages:</strong> TypeScript, C++, Golang, Python, C</li>
-            <li><strong>Technologies:</strong> Node.js, Express.js, AWS, React.js, Flask, Elastic Search, Docker, PostgreSQL, Kubernetes, GenAI, LLM</li>
-            <li><strong>Concepts:</strong> Compiler, Operating System, AI, ML, Neural Networks, API, Database Normalization</li>
+          <li>Owned and scaled a <b>subscription payments platform for 5M+ active subscribers</b> — reliable recurring billing and high availability.</li>
+          <li>Architected backends for <b>10M+ DAU and 3M+ concurrent users</b>, holding <b>sub-50ms p95</b> under peak load.</li>
+          <li>Built a subscription <b>recovery engine</b> (paused → retry) with idempotent processing and failure handling — <b>₹1M+ ARR uplift</b>.</li>
+          <li>Designed recommendation and personalization systems for the consumer app.</li>
+          <li>Built a custom <b>rate limiter</b> for open APIs with load-shedding — live across services, preventing spam and DDoS.</li>
+          <li>Built a custom push-notification system delivering <b>40M+ notifications/hour</b> via fan-out, batching, and load-spreading.</li>
         </ul>
-    </section>
-
-    <section class="section">
-        <h2>Experience</h2>
+      </div>
+      <div class="job reveal">
+        <div class="top">
+          <div><div class="co">Apty</div><div class="ttl">Software Development Engineer</div></div>
+          <div class="meta">Jun 2022 – Mar 2024 · Bengaluru</div>
+        </div>
         <ul>
-            <li><strong>Kutumb (Aug 2023 – Present)</strong> - Senior Software Engineer</li>
-            <li><strong>Apty (June 2022 – March 2024)</strong> - Software Development Engineer</li>
-            <li><strong>Tata 1mg (Dec 2021 – Mar 2022)</strong> - Software Engineer Intern</li>
+          <li>Built a SCIM-based <b>auto user provisioning/de-provisioning</b> system in Golang — ~<b>95%</b> more efficient enterprise user management.</li>
+          <li>Engineered an org-wide <b>Audit Trail Service</b> (Node.js) with fast logging/export — improved audit compliance for 65+ clients.</li>
+          <li>Shipped an in-house <b>feature-flagging tool</b>, cutting operational cost by removing third-party software.</li>
+          <li>Led a content <b>import/export</b> feature (~40% efficiency gain) and multi-GB export analytics on ElasticSearch/Kibana.</li>
+          <li>Automated release-cut-branch blocking via a custom <b>GitHub Action</b>; built an S3 ingestor for the analytics pipeline.</li>
         </ul>
-    </section>
-
-    <section class="section">
-        <h2>Education</h2>
+      </div>
+      <div class="job reveal">
+        <div class="top">
+          <div><div class="co">Tata 1mg</div><div class="ttl">Software Engineer Intern</div></div>
+          <div class="meta">Dec 2021 – Mar 2022 · Remote</div>
+        </div>
         <ul>
-            <li><strong>Army Institute of Technology</strong> - B.E in Information Technology (CGPA: 9.20/10.00)</li>
+          <li>Optimized the <b>expected-time-of-delivery</b> computation.</li>
+          <li>Improved the Cart/SKO <b>notification system</b> for medicines without substitutes.</li>
         </ul>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Razorpay Checkout -->
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-    <script>
-      // ── CONFIG ─────────────────────────────────────────────────────────────
-      // Paste your Razorpay Key ID here (Dashboard → Settings → API Keys).
-      // Use rzp_test_... to trial, rzp_live_... to accept real payments.
-      // This is the SAME key_id you'll put in the TryFit app's local.properties.
-      // The key SECRET is never used here — client-side only needs the key_id.
-      const RAZORPAY_KEY_ID = "PASTE_YOUR_rzp_key_id_HERE";
-      const AMOUNT_INR = 499;                       // booking fee in rupees
-      const YOUR_NAME  = "Vishvajeet Singh";
-      const YOUR_EMAIL = "vishvajeetsingh0605@gmail.com";
-      // ───────────────────────────────────────────────────────────────────────
+<!-- EDUCATION -->
+<section>
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker">Foundation</div>
+      <h2>Education</h2>
+    </div>
+    <div class="skills" style="margin-top:26px">
+      <div class="skill reveal">
+        <div class="co" style="font-size:17px;font-weight:700">Army Institute of Technology</div>
+        <p class="sub" style="margin-top:6px">B.E., Information Technology · <b style="color:#fff">CGPA 9.20/10</b></p>
+        <div class="meta" style="font-family:'JetBrains Mono',monospace;color:var(--muted2);font-size:13px;margin-top:6px">2022 · Pune</div>
+      </div>
+      <div class="skill reveal">
+        <div class="co" style="font-size:17px;font-weight:700">St. Thomas School</div>
+        <p class="sub" style="margin-top:6px">Sr. Secondary <b style="color:#fff">94.6%</b> · Secondary <b style="color:#fff">9.40/10</b></p>
+        <div class="meta" style="font-family:'JetBrains Mono',monospace;color:var(--muted2);font-size:13px;margin-top:6px">Mandsaur, MP</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      const msg = (t, ok) => {
-        const el = document.getElementById("bookMsg");
-        el.textContent = t;
-        el.style.color = ok ? "#1a7f37" : "#b00020";
-      };
+<footer>
+  <div class="wrap">
+    <div>© <span id="yr"></span> Vishvajeet Singh · Backend Engineer</div>
+    <div style="display:flex;gap:18px">
+      <a href="mailto:vishvajeetsingh0605@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/vishvajeetsingh" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/vishvajeet-apty" target="_blank" rel="noopener">GitHub</a>
+      <a href="#book">Book a slot</a>
+    </div>
+  </div>
+</footer>
 
-      document.getElementById("bookBtn").addEventListener("click", function () {
-        if (!RAZORPAY_KEY_ID || RAZORPAY_KEY_ID.startsWith("PASTE_")) {
-          msg("Booking isn't live yet — add your Razorpay Key ID to enable payments.");
-          return;
-        }
-        const rzp = new Razorpay({
-          key: RAZORPAY_KEY_ID,
-          amount: AMOUNT_INR * 100,               // paise
-          currency: "INR",
-          name: YOUR_NAME,
-          description: "1:1 Session Booking",
-          prefill: { name: "", email: "", contact: "" },
-          notes: { purpose: "book_a_slot" },
-          theme: { color: "#3399cc" },
-          handler: function (response) {
-            msg("Payment received (" + response.razorpay_payment_id +
-                "). I'll reach out to schedule your slot. Thank you!", true);
-          },
-          modal: { ondismiss: function () { msg("Payment cancelled — no charge made."); } }
-        });
-        rzp.on("payment.failed", function (r) {
-          msg("Payment failed: " + (r.error && r.error.description ? r.error.description : "please try again."));
-        });
-        rzp.open();
-      });
-    </script>
+<!-- Razorpay Checkout -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  // ── CONFIG ────────────────────────────────────────────────────────────────
+  // Paste your Razorpay Key ID (Dashboard → Settings → API Keys). rzp_test_… to
+  // trial, rzp_live_… for real payments. SAME key_id you put in the TryFit app's
+  // local.properties. The key SECRET is never used client-side.
+  const RAZORPAY_KEY_ID = "PASTE_YOUR_rzp_key_id_HERE";
+  const AMOUNT_INR = 499;
+  // ──────────────────────────────────────────────────────────────────────────
+
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  const msg = (t, ok) => { const el = document.getElementById('bookMsg');
+    el.textContent = t; el.style.color = ok ? '#4ade80' : '#f0a4b0'; };
+
+  document.getElementById('bookBtn').addEventListener('click', function () {
+    if (!RAZORPAY_KEY_ID || RAZORPAY_KEY_ID.startsWith('PASTE_')) {
+      msg("Booking isn't live yet — payments are being set up. Meanwhile, email me and I'll schedule you in.");
+      return;
+    }
+    const rzp = new Razorpay({
+      key: RAZORPAY_KEY_ID, amount: AMOUNT_INR * 100, currency: 'INR',
+      name: 'Vishvajeet Singh', description: '1:1 Session Booking',
+      notes: { purpose: 'book_a_slot' }, theme: { color: '#8b7bff' },
+      handler: function (r) { msg('Payment received (' + r.razorpay_payment_id + '). I’ll email you to schedule your slot — thank you!', true); },
+      modal: { ondismiss: function () { msg('Payment cancelled — no charge made.'); } }
+    });
+    rzp.on('payment.failed', function (r) { msg('Payment failed: ' + ((r.error && r.error.description) || 'please try again.')); });
+    rzp.open();
+  });
+
+  // lightweight scroll reveal
+  const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
 </body>
 </html>
