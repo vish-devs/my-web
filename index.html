@@ -7,9 +7,19 @@
     <style>
         body { font-family: Arial, sans-serif; margin: 40px; padding: 20px; }
         h1, h2 { color: #333; }
-        .section { margin-bottom: 20px; }
         ul { list-style-type: none; padding: 0; }
         li { margin-bottom: 10px; }
+        .section { margin-bottom: 20px; }
+
+        /* Book-a-slot card */
+        .book { margin: 28px 0; padding: 20px 22px; border: 1px solid #eee; border-radius: 12px;
+                background: #fafafa; max-width: 460px; }
+        .book h2 { margin: 0 0 6px; }
+        .book p { margin: 0 0 14px; color: #555; }
+        #bookBtn { appearance: none; border: 0; cursor: pointer; font-size: 16px; font-weight: 600;
+                   color: #fff; background: #3399cc; padding: 12px 22px; border-radius: 28px; }
+        #bookBtn:hover { background: #2b86b5; }
+        #bookMsg { margin-top: 12px; font-size: 14px; }
     </style>
 </head>
 <body>
@@ -19,7 +29,15 @@
         <p>Email: vishvajeetsingh0605@gmail.com</p>
         <p><a href="https://www.linkedin.com/in/vishvajeet-singh-89ba79182/">LinkedIn</a> | <a href="https://github.com/vishvajeet-apty">GitHub</a></p>
     </header>
-    
+
+    <!-- Book a 1:1 slot (Razorpay Standard Checkout) -->
+    <section class="book">
+        <h2>Book a Slot with me</h2>
+        <p>Grab a 1:1 session — mentorship, mock interview, or a technical chat.</p>
+        <button id="bookBtn" type="button">Book a Slot with me · ₹499</button>
+        <div id="bookMsg"></div>
+    </section>
+
     <section class="section">
         <h2>Technical Skills</h2>
         <ul>
@@ -28,7 +46,7 @@
             <li><strong>Concepts:</strong> Compiler, Operating System, AI, ML, Neural Networks, API, Database Normalization</li>
         </ul>
     </section>
-    
+
     <section class="section">
         <h2>Experience</h2>
         <ul>
@@ -37,12 +55,59 @@
             <li><strong>Tata 1mg (Dec 2021 – Mar 2022)</strong> - Software Engineer Intern</li>
         </ul>
     </section>
-    
+
     <section class="section">
         <h2>Education</h2>
         <ul>
             <li><strong>Army Institute of Technology</strong> - B.E in Information Technology (CGPA: 9.20/10.00)</li>
         </ul>
     </section>
+
+    <!-- Razorpay Checkout -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+      // ── CONFIG ─────────────────────────────────────────────────────────────
+      // Paste your Razorpay Key ID here (Dashboard → Settings → API Keys).
+      // Use rzp_test_... to trial, rzp_live_... to accept real payments.
+      // This is the SAME key_id you'll put in the TryFit app's local.properties.
+      // The key SECRET is never used here — client-side only needs the key_id.
+      const RAZORPAY_KEY_ID = "PASTE_YOUR_rzp_key_id_HERE";
+      const AMOUNT_INR = 499;                       // booking fee in rupees
+      const YOUR_NAME  = "Vishvajeet Singh";
+      const YOUR_EMAIL = "vishvajeetsingh0605@gmail.com";
+      // ───────────────────────────────────────────────────────────────────────
+
+      const msg = (t, ok) => {
+        const el = document.getElementById("bookMsg");
+        el.textContent = t;
+        el.style.color = ok ? "#1a7f37" : "#b00020";
+      };
+
+      document.getElementById("bookBtn").addEventListener("click", function () {
+        if (!RAZORPAY_KEY_ID || RAZORPAY_KEY_ID.startsWith("PASTE_")) {
+          msg("Booking isn't live yet — add your Razorpay Key ID to enable payments.");
+          return;
+        }
+        const rzp = new Razorpay({
+          key: RAZORPAY_KEY_ID,
+          amount: AMOUNT_INR * 100,               // paise
+          currency: "INR",
+          name: YOUR_NAME,
+          description: "1:1 Session Booking",
+          prefill: { name: "", email: "", contact: "" },
+          notes: { purpose: "book_a_slot" },
+          theme: { color: "#3399cc" },
+          handler: function (response) {
+            msg("Payment received (" + response.razorpay_payment_id +
+                "). I'll reach out to schedule your slot. Thank you!", true);
+          },
+          modal: { ondismiss: function () { msg("Payment cancelled — no charge made."); } }
+        });
+        rzp.on("payment.failed", function (r) {
+          msg("Payment failed: " + (r.error && r.error.description ? r.error.description : "please try again."));
+        });
+        rzp.open();
+      });
+    </script>
 </body>
 </html>
